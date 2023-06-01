@@ -10,6 +10,9 @@ public class ProductValidator implements Validator<ProductEntity> {
     @Override
     public void validate(ProductEntity productEntity) throws ValidationException {
 
+        System.out.println("[DEBUG] >>> validate");
+        System.out.println(productEntity.toString());
+
         if (productEntity.getId() == null) {
 
             throw new ValidationException("id must not be null");

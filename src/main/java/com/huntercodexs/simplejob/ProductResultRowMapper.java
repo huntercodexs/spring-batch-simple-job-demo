@@ -10,6 +10,10 @@ import java.sql.SQLException;
 public class ProductResultRowMapper implements RowMapper<ProductEntity> {
     @Override
     public ProductEntity mapRow(ResultSet rs, int i) throws SQLException {
+
+        System.out.println("[DEBUG] >>> mapRow");
+        System.out.println(rs.toString());
+
         ProductEntity productEntity = new ProductEntity();
         productEntity.setId(rs.getLong("id"));
         productEntity.setDescription(rs.getString("name"));
