@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+	<Properties>
+		<Property name="LOG_PATTERN">
+			%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex
+		</Property>
+	</Properties>
+	<Appenders>
+		<Console name="LogToConsole" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+
+		<!-- Rolling File Appender -->
+		<RollingRandomAccessFile name="RollingRandomAccessFile" fileName="/home/jereelton/logs/SPRING-BATCH-SIMPLE-JOB-DEMO.log"
+								 filePattern="/home/jereelton/logs/SPRING-BATCH-SIMPLE-JOB-DEMO-%d{yyyy-MM-dd}-%i.log">
+			<PatternLayout>
+				<Pattern>${LOG_PATTERN}</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" />
+				<SizeBasedTriggeringPolicy size="10MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10"/>
+		</RollingRandomAccessFile>
+	</Appenders>
+	<Loggers>
+		<Logger name="com.huntercodexs" level="INFO" additivity="false">
+			<AppenderRef ref="LogToConsole" />
+		</Logger>
+		<Logger name="org.springframework.boot" level="INFO" additivity="false">
+			<AppenderRef ref="LogToConsole" />
+			<AppenderRef ref="RollingRandomAccessFile" />
+		</Logger>
+		<Root level="INFO">
+			<AppenderRef ref="LogToConsole" />
+			<AppenderRef ref="RollingRandomAccessFile" />
+		</Root>
+	</Loggers>
+</Configuration>
